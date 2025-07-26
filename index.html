@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anantha Kumar G | Developer Portfolio</title>
+    <meta name="description" content="Anantha Kumar G - Full Stack Developer from Tuticorin, India. Passionate about creating amazing web applications.">
+    <link rel="icon" href="./assets/img/Anantha Kumar G.jpg">
+    <link rel="stylesheet" href="./assets/CSS/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+
+    <style>
+        :root {
+            /* Colors */
+            --primary-color: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary-color: #ec4899;
+            --accent-color: #06b6d4;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --text-light: #9ca3af;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-card: #ffffff;
+            --border-color: #e5e7eb;
+            --shadow-light: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-heavy: 0 20px 25px rgba(0, 0, 0, 0.1);
+            --gradient-primary: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);
+            --gradient-secondary: linear-gradient(135deg, #06b6d4 0%, #6366f1 100%);
+
+            /* Typography */
+            --font-primary: "Inter", sans-serif;
+            --font-mono: "JetBrains Mono", monospace;
+            --font-size-xs: 0.75rem;
+            --font-size-sm: 0.875rem;
+            --font-size-base: 1rem;
+            --font-size-lg: 1.125rem;
+            --font-size-xl: 1.25rem;
+            --font-size-2xl: 1.5rem;
+            --font-size-3xl: 1.875rem;
+            --font-size-4xl: 2.25rem;
+            --font-size-5xl: 3rem;
+            --font-size-6xl: 3.75rem;
+
+            /* Spacing */
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --spacing-2xl: 3rem;
+            --spacing-3xl: 4rem;
+
+            /* Transitions */
+            --transition-fast: 0.15s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.5s ease;
+
+            /* Z-index */
+            --z-dropdown: 1000;
+            --z-sticky: 1020;
+            --z-fixed: 1030;
+            --z-modal: 1040;
+            --z-popover: 1050;
+            --z-tooltip: 1060;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-3xl);
+            align-items: center;
+        }
+
+        .code-window {
+
+            background: var(--bg-card);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-heavy);
+            border: 1px solid var(--border-color);
+        }
+
+        .window-header {
+            background: var(--bg-secondary);
+            padding: var(--spacing-lg);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-lg);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .window-controls {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        .control {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .close {
+            background: #ff5f57;
+        }
+
+        .minimize {
+            background: #ffbd2e;
+        }
+
+        .maximize {
+            background: #28ca42;
+        }
+
+        .window-title {
+            font-family: var(--font-mono);
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+        }
+
+        .code-content {
+            padding: var(--spacing-xl);
+            font-family: var(--font-mono);
+            font-size: var(--font-size-sm);
+            line-height: 1.8;
+        }
+
+        .code-text {
+            color: black;
+        }
+
+        .code-line {
+            display: flex;
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .line-number {
+            color: var(--text-light);
+            user-select: none;
+            min-width: 20px;
+        }
+
+        .keyword {
+            color: #c792ea;
+        }
+
+        .variable {
+            color: #82aaff;
+            /* color: black; */
+        }
+
+        .property {
+            color: #f78c6c;
+        }
+
+        .string {
+            color: #79bd13;
+        }
+
+        .about-text h3 {
+            font-size: var(--font-size-2xl);
+            font-weight: 700;
+            margin-bottom: var(--spacing-lg);
+            color: var(--text-primary);
+        }
+
+        .about-text p {
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-lg);
+            line-height: 1.7;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-xl);
+            margin: var(--spacing-2xl) 0;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: var(--font-size-3xl);
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .stat-label {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+
+
+        @media screen and (max-width: 768px) {
+            .about-content {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 2rem;
+            }
+
+            .about-visual {
+                /* order:1; */
+                width: 100%;
+            }
+
+            .about-contents {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Scroll to top button -->
+    <div class="scrollToTop-btn">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Light/Dark theme button -->
+    <div class="theme-btn">
+        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun"></i>
+    </div>
+
+    <header>
+        <div class="header">
+            <div class="container">
+                <div class="header-wrapper">
+                    <h1 class="logo">Anantha Kumar <span>G</span></h1>
+                    <div class="nav-container">
+                        <div class="nav-bar">
+                            <div class="nav-close-btn">
+                                <i class="fas fa-times"></i>
+                            </div>
+                            <nav>
+                                <ul>
+                                    <li><a href="#home" class="nav-link active"><i class="fas fa-home"></i> Home</a>
+                                    </li>
+                                    <li><a href="#about" class="nav-link"><i class="fas fa-user"></i> About me</a></li>
+                                    <li><a href="#skills" class="nav-link"><i class="fas fa-file-lines"></i> Skills</a>
+                                    </li>
+                                    <li><a href="#projects" class="nav-link"><i class="fas fa-image"></i> Projects</a>
+                                    </li>
+                                    <li><a href="#contact" class="nav-link"><i class="fas fa-envelope"></i> Contact</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="menu-btn">
+                            <i class="fas fa-bars"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Home Section -->
+    <section class="home" id="home">
+        <div class="container">
+            <div class="home-wrapper">
+                <div class="home-content">
+                    <h2>Hi, I am Anantha Kumar G</h2>
+                    <h3 id="rotating-title">Frontend Developer</h3>
+                    <p>I create stunning, user-friendly website designs that blend visual appeal with the latest design
+                        trends.</p>
+                    <div class="btn-group">
+                        <a href="#contact" class="btn primary-btn">Hire Me <i class="fas fa-arrow-right"></i></a>
+                        <a href="./assets/img/Anantha_Kumar_G_Resume.pdf"
+                            class="btn secondary-btn" target="_blank">Download CV <i class="fas fa-download"></i></a>
+                    </div>
+                    <div class="social-media">
+                        <a href="https://www.linkedin.com/in/ananthakumarg/" class="social-icon" target="_blank"><i
+                                class="fab fa-linkedin-in"></i></a>
+                        <a href="mailto:coding.anantha@gmail.com" class="social-icon"><i class="fa fa-envelope"></i></a>
+                        <a href="https://github.com/anantha-ctrl/" class="social-icon" target="_blank"><i
+                                class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="home-animation">
+                    <div class="tech-orbs">
+                        <div class="orb orb-1">
+                            <i class="fab fa-react"></i>
+                        </div>
+                        <div class="orb orb-2">
+                            <i class="fab fa-js-square"></i>
+                        </div>
+                        <div class="orb orb-3">
+                            <i class="fab fa-java"></i>
+                        </div>
+                        <div class="orb orb-4">
+                            <i class="fab fa-html5"></i>
+                        </div>
+                        <div class="orb orb-5">
+                            <i class="fab fa-css3-alt"></i>
+                        </div>
+                        <div class="orb orb-6">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        
+                        <div class="central-orb">
+                            <div class="pulse-ring"></div>
+                            <div class="pulse-ring pulse-ring-2"></div>
+                            <i class="fas fa-code"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about section" id="about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">About Me</span>
+                <h2 class="section-title">About Me</h2>
+            </div>
+
+            <div class="about-content">
+                <div class="about-visual">
+                    <div class="code-window">
+                        <div class="window-header">
+                            <div class="window-controls">
+                                <span class="control close"></span>
+                                <span class="control minimize"></span>
+                                <span class="control maximize"></span>
+                            </div>
+                            <span class="window-title">developer.js</span>
+                        </div>
+                        <div class="code-content">
+                            <div class="code-line">
+                                <span class="line-number">1</span>
+                                <span class="code-text">
+                                    <span class="keyword">const</span>
+                                    <span class="variable">developer</span> = {
+                                </span>
+                            </div>
+                            <div class="code-line">
+                                <span class="line-number">2</span>
+                                <span class="code-text">
+                                    &nbsp;&nbsp;<span class="property">name</span>:
+                                    <span class="string">"Anantha Kumar G"</span>,
+                                </span>
+                            </div>
+                            <div class="code-line">
+                                <span class="line-number">3</span>
+                                <span class="code-text">
+                                    &nbsp;&nbsp;<span class="property">role</span>:
+                                    <span class="string">"Full Stack Developer"</span>,
+                                </span>
+                            </div>
+                            <div class="code-line">
+                                <span class="line-number">4</span>
+                                <span class="code-text">
+                                    &nbsp;&nbsp;<span class="property">location</span>:
+                                    <span class="string">"Tuticorin, India"</span>,
+                                </span>
+                            </div>
+                            <div class="code-line">
+                                <span class="line-number">5</span>
+                                <span class="code-text">
+                                    &nbsp;&nbsp;<span class="property">passion</span>:
+                                    <span class="string">"Creating Amazing WebPage"</span>
+                                </span>
+                            </div>
+                            <div class="code-line">
+                                <span class="line-number">6</span>
+                                <span class="code-text">};</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-contents">
+                    <h2>I'm Anantha Kumar G</h2>
+                    <h3><span>Full Stack Developer</span></h3>
+                    <p>I am Anantha Kumar, a passionate and detail-focused web and software developer from Tirunelveli, and a recent B.E graduate in Computer Science and Engineering from GRACE College of Engineering, Thoothukudi. I specialize in building responsive and dynamic web applications with a strong foundation in full stack development.</p>
+                    <p>My technical skill set includes HTML, CSS, JavaScript, React.js, Java, JSP, Spring Boot, and
+                        MySQL. I've developed impactful projects like "Ask Expert" – a platform that connects users
+                        with specialists, and a Task Management System that supports secure and efficient task
+                        operations.
+                    </p>
+                    <p>I have completed internships as a Full Stack Developer at NoviTech R&D Pvt Ltd and as a
+                        React Frontend Developer at StackNQueue Pvt Ltd.
+                        My time at StackNQueue has been especially valuable, providing real-time experience in
+                        building production-ready applications and learning key concepts such as token-based authentication, secure API handling, and frontend integration. I am constantly learning and pushing my boundaries, with the short-term goal of becoming a skilled full stack and app developer, and a long-term aspiration to contribute to secure and scalable digital solutions.
+                    </p>
+                    <p>I am actively seeking a full-time job where I can apply my technical skills, contribute to innovative projects, and grow as a developer in a challenging, fast-paced environment. I am committed to continuous learning and look forward to joining a team where I can build meaningful software solutions</p>
+                    <a href="./assets/img/Anantha_Kumar_G.docx"
+                        class="btn primary-btn" target="_blank">Download CV <i class="fas fa-download"></i></a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills section" id="skills">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">My Skills</span>
+                <h2 class="section-title">Skills</h2>
+            </div>
+            <div class="skills-wrapper">
+                <div class="skills-content">
+                    <h3>Education & Skills</h3>
+                    <div class="skills-grid">
+                        <div class="education-box">
+                            <h4 class="skills-title"><span>Education</span></h4>
+                            <div class="education">
+                                <div class="education-item">
+                                    <span class="year">2022-2026</span>
+                                    <h5>B.E in Computer Science and Engineering</h5>
+                                    <p>Anna University - CGPA 8.0</p>
+                                    <p class="institution">GRACE College of Engineering</p>
+                                </div>
+                                <div class="education-item">
+                                    <span class="year">2020-2022</span>
+                                    <h5>Computer Science</h5>
+                                    <p>State Board</p>
+                                    <p class="institution">BMC Higher Secondary School</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skills-box">
+                            <h4 class="skills-title"><span>Technical Skills</span></h4>
+                            <div class="skills-columns">
+                                <div class="skills-column">
+                                    <div class="skill-item">
+                                        <div class="skill-info">
+                                            <p>HTML</p>
+                                            <p>100%</p>
+                                        </div>
+                                        <div class="skill-bar">
+                                            <div class="skill-progress html"></div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="skill-info">
+                                            <p>CSS</p>
+                                            <p>90%</p>
+                                        </div>
+                                        <div class="skill-bar">
+                                            <div class="skill-progress css"></div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="skill-info">
+                                            <p>JavaScript</p>
+                                            <p>80%</p>
+                                        </div>
+                                        <div class="skill-bar">
+                                            <div class="skill-progress js"></div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="skill-info">
+                                            <p>React JS</p>
+                                            <p>75%</p>
+                                        </div>
+                                        <div class="skill-bar">
+                                            <div class="skill-progress react"></div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="skill-info">
+                                            <p>DataScience</p>
+                                            <p>80%</p>
+                                        </div>
+                                        <div class="skill-bar">
+                                            <div class="skill-progress datascience"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="skills-column">
+                                    <div class="skill-item">
+                                        <div class="skill-info">
+                                            <p>Python</p>
+                                            <p>85%</p>
+                                        </div>
+                                        <div class="skill-bar">
+                                            <div class="skill-progress python"></div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="skill-info">
+                                            <p>Java</p>
+                                            <p>70%</p>
+                                        </div>
+                                        <div class="skill-bar">
+                                            <div class="skill-progress java"></div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="skill-info">
+                                            <p>Django</p>
+                                            <p>70%</p>
+                                        </div>
+                                        <div class="skill-bar">
+                                            <div class="skill-progress django"></div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="skill-info">
+                                            <p>MySQL</p>
+                                            <p>70%</p>
+                                        </div>
+                                        <div class="skill-bar">
+                                            <div class="skill-progress mysql"></div>
+                                        </div>
+                                    </div>
+                                    <div class="skill-item">
+                                        <div class="skill-info">
+                                            <p>Bootstrap</p>
+                                            <p>80%</p>
+                                        </div>
+                                        <div class="skill-bar">
+                                            <div class="skill-progress bootstrap"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects section" id="projects">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">My Work</span>
+                <h2 class="section-title">Projects</h2>
+            </div>
+            <div class="projects-wrapper">
+                <div class="projects-intro">
+                    <p>I have completed one Full Stack Project and some basic projects using HTML, CSS, and JavaScript.
+                        Currently working on more full Stack projects for the future.</p>
+                </div>
+                <div class="projects-grid">
+
+
+                    <div class="project-card">
+                        <div class="project-img">
+                            <div class="project-placeholder">
+                                <i class="fas fa-list-check"></i>
+                                <span>Task Management</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3>Task Management</h3>
+                            <h4>Tech Stack:</h4>
+                            <span>HTML, CSS, JavaScript,React Js,Bootstrap</span>
+                            <div class="project-links">
+                                <!-- <a href="https://github.com/anantha-ctrl/ToDoApp" target="_blank" class="btn project-btn">
+                                    <i class="fab fa-github"></i> Github
+                                </a> -->
+                                <a href="https://anantha-ctrl.github.io/ToDoApp/"
+                                    class="btn project-btn" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-img">
+                            <div class="project-placeholder">
+                                <i class="fas fa-book-open"></i>
+                                <span>Quotes Generator</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3>Quotes Generator</h3>
+                            <h4>Tech Stack:</h4>
+                            <span>HTML, CSS, JavaScript, Bootstrap, React Js</span>
+                            <div class="project-links">
+                                <a href="https://amazing-boba-8aa0d2.netlify.app/"
+                                    class="btn project-btn" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="project-card">
+                        <div class="project-img">
+                            <div class="project-placeholder">
+                                <i class="fas fa-cloud-sun"></i>
+                                <span>Weather App</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3>Weather App</h3>
+                            <h4>Tech Stack:</h4>
+                            <span>HTML, CSS, JavaScript, Bootstrap, React Js</span>
+                            <div class="project-links">
+                                <a href="https://weather-application25.netlify.app/"
+                                    class="btn project-btn" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                                <!-- <a href="#" class="btn project-btn">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-img">
+                            <div class="project-placeholder">
+                                <i class="fas fa-utensils"></i>
+                                <span>SnapRecipe</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3>SnapRecipe</h3>
+                            <h4>Tech Stack:</h4>
+                            <span>HTML, CSS, JavaScript, Bootstrap, React Js</span>
+                            <div class="project-links">
+                                <a href="https://snap-recipe-2025.netlify.app/"
+                                    class="btn project-btn" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-img">
+                            <div class="project-placeholder">
+                                <i class="fas fa-globe"></i>
+                                <span>Blog Website</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3>Blog Website</h3>
+                            <h4>Tech Stack:</h4>
+                            <span>HTML, CSS, JavaScript, Bootstrap, React Js</span>
+                            <div class="project-links">
+                                <a href="https://same-uob4xj1bdab-latest.netlify.app/"
+                                    class="btn project-btn" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-img">
+                            <div class="project-placeholder">
+                                <i class="fab fa-facebook-f"></i>
+                                <span>Facebook Clone</span>
+
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3>Facebook Clone</h3>
+                            <h4>Tech Stack:</h4>
+                            <span>HTML, CSS, JavaScript, Bootstrap, React Js</span>
+                            <div class="project-links">
+                                <a href="https://same-facebok-clone-latest.netlify.app/"
+                                    class="btn project-btn" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-img">
+                            <div class="project-placeholder">
+                               <i class="fas fa-user-check"></i>
+                               <span>Gender-Age-Detection</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3>Gender-Age-Detection</h3>
+                            <h4>Tech Stack:</h4>
+                            <span>Python,Machine Learning, DataScience, OpenCV, HTML, CSS, JavaScript, Bootstrap</span>
+                            <div class="project-links">
+                                <a href="https://gender-age-detection-25.netlify.app/"
+                                    class="btn project-btn" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-img">
+                            <div class="project-placeholder">
+                               <i class="fas fa-calculator"></i>
+                               <span>Calculator</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3>Calculator</h3>
+                            <h4>Tech Stack:</h4>
+                            <span>HTML, CSS, JavaScript, Bootstrap, React Js</span>
+                            <div class="project-links">
+                                <a href="https://scientific-calculator-2025.netlify.app/"
+                                    class="btn project-btn" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-img">
+                            <div class="project-placeholder">
+                               <i class="fas fa-user-tie"></i>
+                               <span>Resume Builder Application</span>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3>Resume Builder Application</h3>
+                            <h4>Tech Stack:</h4>
+                            <span>HTML, CSS, JavaScript, Bootstrap, React Js</span>
+                            <div class="project-links">
+                                <a href="https://resume-builder-webapp25.netlify.app/"
+                                    class="btn project-btn" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact section" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Get In Touch</span>
+                <h2 class="section-title">Contact Me</h2>
+            </div>
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <h3>Let's get in touch</h3>
+                    <div class="contact-list">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Phone</h4>
+                                <p>+91 9894717941</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Email</h4>
+                                <p><a href="mailto:coding.anantha@gmail.com">coding.anantha@gmail.com</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-location-dot"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Location</h4>
+                                <p>Tuticorin</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form-container">
+                    <p>I'm always open to discussing <span>website design work or partnership</span> opportunities.</p>
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <input type="text" placeholder="Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Email" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea rows="7" placeholder="Message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn primary-btn">Send Message <i
+                                class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-wrapper">
+                <div class="footer-info">
+                    <h2>Anantha Kumar G</h2>
+                    <p>Full Stack Developer</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#about">About</a>
+                    <a href="#skills">Skills</a>
+                    <a href="#projects">Projects</a>
+                </div>
+                <div class="footer-socials">
+                    <a href="https://www.linkedin.com/in/ananthakumarg/"  target="_blank" class="social-icon"><i
+                            class="fab fa-linkedin-in"></i></a>
+                    <a href="mailto:coding.anantha@gmail.com"  class="social-icon"><i class="fa fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p><i class="far fa-copyright"></i> 2025 by Anantha Kumar G. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./assets/JS/script.js"></script>
+</body>
+
+</html>
