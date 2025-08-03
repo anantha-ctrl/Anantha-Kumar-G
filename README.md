@@ -26,7 +26,7 @@ Welcome to the portfolio website of **Anantha Kumar G**, a passionate Full Stack
 
 ## 🌐 Live Demo
 
-Check out the live portfolio: [Portfolio Website](https://your-portfolio-link.com)
+Check out the live portfolio: [Portfolio Website](https://anantha-kumar-g.netlify.app/)
 
 ## 📫 Contact
 
