@@ -199,7 +199,7 @@ contactForm.addEventListener("submit", (e) => {
   }
 
   // Send email using EmailJS
-  emailjs.send("service_7bj9ckh", "template_22wtnhq", {
+  emailjs.send("service_7bj9ckh", "__ejs-test-mail-service__", {
     from_name: name,
     from_email: email,
     message: message,
