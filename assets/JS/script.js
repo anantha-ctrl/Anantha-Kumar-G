@@ -179,41 +179,38 @@ const animateSkillBars = () => {
 window.addEventListener("scroll", animateSkillBars)
 window.addEventListener("load", animateSkillBars)
 
-// ===== CONTACT FORM =====
+// ===== CONTACT FORM WITH EMAILJS =====
 const contactForm = document.querySelector(".contact-form")
+
+// Initialize EmailJS (replace 'YOUR_USER_ID' with your actual user ID)
+emailjs.init("hnpU3cK0jaVQneonL")
 
 contactForm.addEventListener("submit", (e) => {
   e.preventDefault()
 
   // Get form data
-  const formData = new FormData(contactForm)
-  const name = formData.get("name") || contactForm.querySelector('input[type="text"]').value
-  const email = formData.get("email") || contactForm.querySelector('input[type="email"]').value
-  const message = formData.get("message") || contactForm.querySelector("textarea").value
+  const name = contactForm.querySelector('input[type="text"]').value
+  const email = contactForm.querySelector('input[type="email"]').value
+  const message = contactForm.querySelector("textarea").value
 
-  // Simple validation
   if (!name || !email || !message) {
     alert("Please fill in all fields")
     return
   }
 
-  // Simulate form submission
-  alert("Thank you for your message! I will get back to you soon.")
-  contactForm.reset()
-})
-
-// ===== SMOOTH SCROLLING FOR ANCHOR LINKS =====
-document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-  anchor.addEventListener("click", function (e) {
-    e.preventDefault()
-    const target = document.querySelector(this.getAttribute("href"))
-    if (target) {
-      target.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      })
-    }
+  // Send email using EmailJS
+  emailjs.send("service_7bj9ckh", "template_3ef9i7g", {
+    from_name: name,
+    from_email: email,
+    message: message,
   })
+    .then(() => {
+      alert("Thank you for your message! I will get back to you soon.")
+      contactForm.reset()
+    })
+    .catch(() => {
+      alert("Oops! Something went wrong. Please try again later.")
+    })
 })
 
 // ===== INTERSECTION OBSERVER FOR ANIMATIONS =====
