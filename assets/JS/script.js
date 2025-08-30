@@ -183,7 +183,10 @@ window.addEventListener("load", animateSkillBars)
 const contactForm = document.querySelector(".contact-form")
 
 // Initialize EmailJS (replace 'YOUR_USER_ID' with your actual user ID)
-emailjs.init("hnpU3cK0jaVQneonL")
+// emailjs.init("hnpU3cK0jaVQneonL")
+emailjs.init({
+        publicKey: "hnpU3cK0jaVQneonL",
+      });
 
 contactForm.addEventListener("submit", (e) => {
   e.preventDefault()
@@ -199,7 +202,7 @@ contactForm.addEventListener("submit", (e) => {
   }
 
   // Send email using EmailJS
-  emailjs.send("service_7bj9ckh", "__ejs-test-mail-service__", {
+  emailjs.send("service_7bj9ckh", "template_22wtnhq", {
     from_name: name,
     from_email: email,
     message: message,
